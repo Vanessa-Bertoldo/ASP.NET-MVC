@@ -47,35 +47,26 @@ namespace web.students.Controllers
             }
             return View(clientes);
         }
+        // Anotação de uso do Verb HTTP Get
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Edit(int id)
         {
-            Console.WriteLine("Executou a Action Cadastrar()");
-            //Cria a variável para armazenar o SelectList
             var selectListRepresentantes =
                 new SelectList(representantes,
                                 nameof(RepresentanteModel.RepresentanteId),
                                 nameof(RepresentanteModel.NomeRepresentante));
-            //Adiciona o SelectList a ViewBag para se enviado para a View
-            //A propriedade Representantes é criada de forma dinâmica na ViewBag
             ViewBag.Representantes = selectListRepresentantes;
-            // Retorna para a View Create um 
-            // objeto modelo com as propriedades em branco 
-            return View(new ClienteModel());
+            // Simulando a busca no banco de dados 
+            var clienteConsultado =
+                clientes.Where(c => c.ClienteId == id).FirstOrDefault();
+            // Retornando o cliente consultado para a View
+            return View(clienteConsultado);
         }
-        // Anotação de uso do Verb HTTP Post
         [HttpPost]
-        public IActionResult Create(ClienteModel clienteModel)
+        public IActionResult Edit(ClienteModel clienteModel)
         {
-            // Simila que os dados foram gravados.
-            Console.WriteLine("Gravando o cliente");
-            //Criando a mensagem de sucesso que será exibida para o Cliente
-            TempData["mensagemSucesso"] = $"O cliente {clienteModel.Nome} foi cadastrado com suceso";
-            // Substituímos o return View()
-            // pelo método de redirecionamento
+            TempData["mensagemSucesso"] = $"Os dados do cliente {clienteModel.Nome} foram alterados com suceso";
             return RedirectToAction(nameof(Index));
-            // O trecho nameof(Index) poderia ser usado da forma abaixo
-            // return RedirectToAction("Index");
         }
 
         public static List<RepresentanteModel> GerarRepresentantesMocados()
