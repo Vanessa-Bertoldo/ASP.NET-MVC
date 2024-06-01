@@ -28,3 +28,4 @@ C:\Users\Z\Documents\projetosFaculdade\WebStudents\obj\Debug\net8.0\refint\web.s
 C:\Users\Z\Documents\projetosFaculdade\WebStudents\obj\Debug\net8.0\web.students.pdb
 C:\Users\Z\Documents\projetosFaculdade\WebStudents\obj\Debug\net8.0\web.students.genruntimeconfig.cache
 C:\Users\Z\Documents\projetosFaculdade\WebStudents\obj\Debug\net8.0\ref\web.students.dll
+C:\Users\Z\Documents\projetosFaculdade\WebStudents\obj\Debug\net8.0\web.students.sourcelink.json
