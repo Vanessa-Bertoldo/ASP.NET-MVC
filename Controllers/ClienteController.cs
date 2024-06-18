@@ -69,6 +69,37 @@ namespace web.students.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            var selectListRepresentantes =
+                new SelectList(representantes,
+                                nameof(RepresentanteModel.RepresentanteId),
+                                nameof(RepresentanteModel.NomeRepresentante));
+            ViewBag.Representantes = selectListRepresentantes;
+            // Simulando a busca no banco de dados 
+            var clienteConsultado =
+                clientes.Where(c => c.ClienteId == id).FirstOrDefault();
+            // Retornando o cliente consultado para a View
+            return View(clienteConsultado);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            // Simulando a busca no banco de dados 
+            var clienteConsultado =
+                clientes.Where(c => c.ClienteId == id).FirstOrDefault();
+            if (clienteConsultado != null)
+            {
+                TempData["mensagemSucesso"] = $"Os dados do cliente {clienteConsultado.Nome} foram removidos com sucesso";
+            }
+            else
+            {
+                TempData["mensagemSucesso"] = $"OPS !!! Cliente inexistente.";
+            }
+            return RedirectToAction(nameof(Index));
+        }
         public static List<RepresentanteModel> GerarRepresentantesMocados()
         {
             var representantes = new List<RepresentanteModel>
