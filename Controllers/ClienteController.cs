@@ -1,15 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using web.students.Data.Contexts;
 using web.students.Models;
 
 namespace web.students.Controllers
 {
     public class ClienteController : Controller
     {
+        private readonly DatabaseContext _context;
         public IList<ClienteModel> clientes { get; set; }
         public IList<RepresentanteModel> representantes { get; set; }
-        public ClienteController() 
+        public ClienteController(DatabaseContext context) 
         {
+            _context = context;
             clientes = GerarClientesMocados();
             representantes = GerarRepresentantesMocados();
         }
@@ -39,50 +43,7 @@ namespace web.students.Controllers
             }
             return clientes;
         }
-        public IActionResult Index()
-        {
-            if(clientes == null)
-            {
-                clientes = new List<ClienteModel>();
-            }
-            return View(clientes);
-        }
-        // Anotação de uso do Verb HTTP Get
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            var selectListRepresentantes =
-                new SelectList(representantes,
-                                nameof(RepresentanteModel.RepresentanteId),
-                                nameof(RepresentanteModel.NomeRepresentante));
-            ViewBag.Representantes = selectListRepresentantes;
-            // Simulando a busca no banco de dados 
-            var clienteConsultado =
-                clientes.Where(c => c.ClienteId == id).FirstOrDefault();
-            // Retornando o cliente consultado para a View
-            return View(clienteConsultado);
-        }
-        [HttpPost]
-        public IActionResult Edit(ClienteModel clienteModel)
-        {
-            TempData["mensagemSucesso"] = $"Os dados do cliente {clienteModel.Nome} foram alterados com suceso";
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
-        public IActionResult Detail(int id)
-        {
-            var selectListRepresentantes =
-                new SelectList(representantes,
-                                nameof(RepresentanteModel.RepresentanteId),
-                                nameof(RepresentanteModel.NomeRepresentante));
-            ViewBag.Representantes = selectListRepresentantes;
-            // Simulando a busca no banco de dados 
-            var clienteConsultado =
-                clientes.Where(c => c.ClienteId == id).FirstOrDefault();
-            // Retornando o cliente consultado para a View
-            return View(clienteConsultado);
-        }
+     
 
         [HttpGet]
         public IActionResult Delete(int id)
@@ -111,5 +72,129 @@ namespace web.students.Controllers
             };
             return representantes;
         }
+
+        [HttpPost]
+        public IActionResult create(ClienteModel cliente)
+        {
+            _context.Cliente.Add(cliente);
+            _context.SaveChanges();
+            TempData["mensagemSucesso"] = $"O cliente {cliente.Nome} foi cadastrado com sucesso";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult EditCliente(ClienteModel clienteModel)
+        {
+            _context.Update(clienteModel);
+            _context.SaveChanges();
+            TempData["mensagemSucesso"] = $"Os dados do cliente {clienteModel.Nome} foram alterados com sucesso";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult DeleteCliente(int id)
+        {
+            var cliente = _context.Cliente.Find(id);
+            if (cliente != null)
+            {
+                _context.Cliente.Remove(cliente);
+                _context.SaveChanges();
+                TempData["mensagemSucesso"] = $"Os dados do cliente {cliente.Nome} foram removidos com sucesso";
+            }
+            else
+            {
+                TempData["mensagemSucesso"] = "OPS !!! Cliente inexistente.";
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Index()
+        {
+            var clientes = _context.Cliente.Include(c => c.Representante).ToList();
+            return View(clientes);
+        }
+
+        // Anotação de uso do Verb HTTP Get
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var cliente = _context.Cliente.Find(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                ViewBag.Representantes =
+                    new SelectList(_context.Representantes.ToList(),
+                                    "RepresentanteId",
+                                    "NomeRepresentante",
+                                    cliente.RepresentanteId);
+                return View(cliente);
+            }
+        }
+
+        // Anotação de uso do Verb HTTP Get
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            // Usando o método Include para carregar o representante associado
+            var cliente = _context.Cliente
+                            .Include(c => c.Representante) // Carrega o representante junto com o cliente
+                            .FirstOrDefault(c => c.ClienteId == id); // Encontra o cliente pelo id
+            if (cliente == null)
+            {
+                return NotFound(); // Retorna um erro 404 se o cliente não for encontrado
+            }
+            else
+            {
+                return View(cliente); // Retorna a view com os dados do cliente e seu representante
+            }
+        }
+
+        //public IActionResult Index()
+        //{
+        //    if(clientes == null)
+        //    {
+        //        clientes = new List<ClienteModel>();
+        //    }
+        //    return View(clientes);
+        //}
+        // Anotação de uso do Verb HTTP Get
+        //[HttpGet]
+        //public IActionResult Edit(int id)
+        //{
+        //    var selectListRepresentantes =
+        //        new SelectList(representantes,
+        //                        nameof(RepresentanteModel.RepresentanteId),
+        //                        nameof(RepresentanteModel.NomeRepresentante));
+        //    ViewBag.Representantes = selectListRepresentantes;
+        //    // Simulando a busca no banco de dados 
+        //    var clienteConsultado =
+        //        clientes.Where(c => c.ClienteId == id).FirstOrDefault();
+        //    // Retornando o cliente consultado para a View
+        //    return View(clienteConsultado);
+        //}
+        [HttpPost]
+        public IActionResult Edit(ClienteModel clienteModel)
+        {
+            TempData["mensagemSucesso"] = $"Os dados do cliente {clienteModel.Nome} foram alterados com suceso";
+            return RedirectToAction(nameof(Index));
+        }
+
+        //[HttpGet]
+        //public IActionResult Detail(int id)
+        //{
+        //    var selectListRepresentantes =
+        //        new SelectList(representantes,
+        //                        nameof(RepresentanteModel.RepresentanteId),
+        //                        nameof(RepresentanteModel.NomeRepresentante));
+        //    ViewBag.Representantes = selectListRepresentantes;
+        //    // Simulando a busca no banco de dados 
+        //    var clienteConsultado =
+        //        clientes.Where(c => c.ClienteId == id).FirstOrDefault();
+        //    // Retornando o cliente consultado para a View
+        //    return View(clienteConsultado);
+        //}
     }
 }

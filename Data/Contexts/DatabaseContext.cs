@@ -97,6 +97,7 @@ namespace web.students.Data.Contexts
             });
 
         }
+    
         public DatabaseContext(DbContextOptions options) : base(options) { }
         protected DatabaseContext(){ }
     }
