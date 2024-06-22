@@ -12,5 +12,6 @@
         public LojaModel Loja { get; set; }
         //Relacionamento com produto
         public List<PedidoProdutoModel> PedidoProdutos { get; set; }
+        public object Pedido { get; internal set; }
     }
 }
