@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[8.0.6, )"
             },
+            "Moq.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.1.2, )"
+            },
             "Oracle.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.23.40, )"

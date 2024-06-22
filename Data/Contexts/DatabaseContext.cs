@@ -5,8 +5,15 @@ namespace web.students.Data.Contexts
 {
     public class DatabaseContext : DbContext
     {
+        public virtual DbSet<RepresentanteModel> Representantes { get; set; }
+        public virtual DbSet<ClienteModel> Clientes { get; set; }
+        public virtual DbSet<ProdutoModel> Produtos { get; set; }
+        public virtual DbSet<LojaModel> Lojas { get; set; }
+        public virtual DbSet<PedidoModel> Pedidos { get; set; }
+        public virtual DbSet<FornecedorModel> Fornecedores { get; set; }
+        public virtual DbSet<PedidoProdutoModel> PedidoProdutos { get; set; }
         // TODO: propriedade para manipular as entidades
-        public DbSet<RepresentanteModel> Representantes { get; set; }
+        public DbSet<RepresentanteModel> _Representantes { get; set; }
         public DbSet<ClienteModel> Cliente { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oQ/I3WilfzBLOsokdS2ZhAk1tN0Y4wKgW9QGagt/7vEYdLtCCSWfr7+21fNVE9FJDu1as/O+jKFH+ckT17GyMg==",
+  "dgSpecHash": "4MU6G29Paaay3wkHYkVzVBZb6QsfBQruJ+MkCpNVZi6QqCvQFX79ItX9e2P9Ai5ReVTYtrXVGy2HD3kqA07qmg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Z\\Documents\\projetosFaculdade\\WebStudents\\web.students.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,8 @@
     "C:\\Users\\Z\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\Z\\.nuget\\packages\\moq\\4.20.70\\moq.4.20.70.nupkg.sha512",
+    "C:\\Users\\Z\\.nuget\\packages\\moq.entityframeworkcore\\8.0.1.2\\moq.entityframeworkcore.8.0.1.2.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\oracle.entityframeworkcore\\8.23.40\\oracle.entityframeworkcore.8.23.40.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\oracle.manageddataaccess.core\\23.4.0\\oracle.manageddataaccess.core.23.4.0.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

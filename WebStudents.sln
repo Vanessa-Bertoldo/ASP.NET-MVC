@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web.students", "web.students.csproj", "{6CE228BC-209A-4DE8-9A1B-BEB0DFD24795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web.students", "web.students.csproj", "{6CE228BC-209A-4DE8-9A1B-BEB0DFD24795}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Web.Alunos.Tests", "..\Fiap.Web.Alunos.Tests\Fiap.Web.Alunos.Tests.csproj", "{5F3653DD-576F-4ED9-ACFB-D69028E1DCE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6CE228BC-209A-4DE8-9A1B-BEB0DFD24795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE228BC-209A-4DE8-9A1B-BEB0DFD24795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE228BC-209A-4DE8-9A1B-BEB0DFD24795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F3653DD-576F-4ED9-ACFB-D69028E1DCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3653DD-576F-4ED9-ACFB-D69028E1DCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3653DD-576F-4ED9-ACFB-D69028E1DCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3653DD-576F-4ED9-ACFB-D69028E1DCE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

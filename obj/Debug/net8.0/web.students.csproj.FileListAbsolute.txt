@@ -111,3 +111,7 @@ C:\Users\Z\Documents\projetosFaculdade\WebStudents\bin\Debug\net8.0\runtimes\osx
 C:\Users\Z\Documents\projetosFaculdade\WebStudents\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll
 C:\Users\Z\Documents\projetosFaculdade\WebStudents\obj\Debug\net8.0\web.students.csproj.AssemblyReference.cache
 C:\Users\Z\Documents\projetosFaculdade\WebStudents\obj\Debug\net8.0\web.students.csproj.CopyComplete
+C:\Users\Z\Documents\projetosFaculdade\WebStudents\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\Z\Documents\projetosFaculdade\WebStudents\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\Z\Documents\projetosFaculdade\WebStudents\bin\Debug\net8.0\Moq.dll
+C:\Users\Z\Documents\projetosFaculdade\WebStudents\bin\Debug\net8.0\Moq.EntityFrameworkCore.dll
