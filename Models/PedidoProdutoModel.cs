@@ -11,7 +11,9 @@
         public int LojaId { get; set; }
         public LojaModel Loja { get; set; }
         //Relacionamento com produto
-        public List<PedidoProdutoModel> PedidoProdutos { get; set; }
-        public object Pedido { get; internal set; }
+        public ICollection<PedidoProdutoModel> PedidoProdutos { get; set; }
+        public PedidoModel Pedido { get; internal set; }
+        public int ProdutoId { get; internal set; }
+        public ProdutoModel Produto { get; internal set; }
     }
 }

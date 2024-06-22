@@ -84,7 +84,7 @@ namespace web.students.Data.Contexts
                 entity.HasKey(f => f.FornecedorId);
                 entity.Property(f => f.Nome).IsRequired();
             });
-            // Configuração para PedidoProdutoModel (relacionamento muitos-para-muitos)
+            //Configuração para PedidoProdutoModel(relacionamento muitos - para - muitos)
             modelBuilder.Entity<PedidoProdutoModel>(entity =>
             {
                 entity.HasKey(pp => new { pp.PedidoId, pp.ProdutoId });
@@ -95,6 +95,7 @@ namespace web.students.Data.Contexts
                       .WithMany(p => p.PedidoProdutos)
                       .HasForeignKey(pp => pp.ProdutoId);
             });
+
         }
         public DatabaseContext(DbContextOptions options) : base(options) { }
         protected DatabaseContext(){ }
