@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.students.Data.Contexts;
 using web.students.Models;
+using web.students.ViweModels;
 
 namespace web.students.Controllers
 {
@@ -24,27 +25,27 @@ namespace web.students.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            ViewBag.Representantes =
-                new SelectList(_context.Representantes.ToList()
-                                , "RepresentanteId"
-                                , "NomeRepresentante");
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Create()
+        //{
+        //    ViewBag.Representantes =
+        //        new SelectList(_context.Representantes.ToList()
+        //                        , "RepresentanteId"
+        //                        , "NomeRepresentante");
+        //    return View();
+        //}
 
 
 
-        // Anotação de uso do Verb HTTP Post
-        [HttpPost]
-        public IActionResult Create(ClienteModel clienteModel)
-        {
-            _context.Clientes.Add(clienteModel);
-            _context.SaveChanges();
-            TempData["mensagemSucesso"] = $"O cliente {clienteModel.Nome} foi cadastrado com sucesso";
-            return RedirectToAction(nameof(Index));
-        }
+        //// Anotação de uso do Verb HTTP Post
+        //[HttpPost]
+        //public IActionResult Create(ClienteModel clienteModel)
+        //{
+        //    _context.Clientes.Add(clienteModel);
+        //    _context.SaveChanges();
+        //    TempData["mensagemSucesso"] = $"O cliente {clienteModel.Nome} foi cadastrado com sucesso";
+        //    return RedirectToAction(nameof(Index));
+        //}
 
 
         // Anotação de uso do Verb HTTP Get
@@ -117,6 +118,64 @@ namespace web.students.Controllers
                 TempData["mensagemSucesso"] = "OPS !!! Cliente inexistente.";
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var viewModel = new ClienteCreateViewModel
+            {
+                Representantes = new SelectList(_context.Representantes.ToList(), "RepresentanteId", "NomeRepresentante")
+            };
+            return View(viewModel);
+        }
+        //[HttpPost]
+        //public IActionResult Create(ClienteCreateViewModel viewModel)
+        //{
+        //    var clienteModel = new ClienteModel
+        //    {
+        //        ClienteId = viewModel.ClienteId,
+        //        Nome = viewModel.Nome,
+        //        Sobrenome = viewModel.Sobrenome,
+        //        Email = viewModel.Email,
+        //        DataNascimento = viewModel.DataNascimento,
+        //        Observacao = viewModel.Observacao,
+        //        RepresentanteId = viewModel.RepresentanteId
+        //    };
+        //    _context.Clientes.Add(clienteModel);
+        //    _context.SaveChanges();
+        //    TempData["mensagemSucesso"] = $"O cliente {clienteModel.Nome} foi cadastrado com sucesso";
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        [HttpPost]
+        public IActionResult Create(ClienteCreateViewModel viewModel)
+        {
+            // Verifica se todos os dados enviados estão válidos conforme as regras definidas no ViewModel
+            if (ModelState.IsValid)
+            {
+                var cliente = new ClienteModel
+                {
+                    ClienteId = viewModel.ClienteId,
+                    Nome = viewModel.Nome,
+                    Sobrenome = viewModel.Sobrenome,
+                    Email = viewModel.Email,
+                    DataNascimento = viewModel.DataNascimento,
+                    Observacao = viewModel.Observacao,
+                    RepresentanteId = viewModel.RepresentanteId
+                };
+                _context.Clientes.Add(cliente);
+                _context.SaveChanges();
+                TempData["mensagemSucesso"] = $"O cliente {viewModel.Nome} foi cadastrado com sucesso";
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                // Se os dados não estão válidos, recarrega a lista de representantes para a seleção na View
+                viewModel.Representantes = new SelectList(_context.Representantes.ToList(), "RepresentanteId", "NomeRepresentante", viewModel.RepresentanteId);
+                // Retorna a View com o ViewModel contendo os dados submetidos e os erros de validação
+                return View(viewModel);
+            }
         }
     }
 }
