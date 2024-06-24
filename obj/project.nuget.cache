@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "4MU6G29Paaay3wkHYkVzVBZb6QsfBQruJ+MkCpNVZi6QqCvQFX79ItX9e2P9Ai5ReVTYtrXVGy2HD3kqA07qmg==",
+  "dgSpecHash": "XmvGzisKPbWz+rPpQDU9zNmo746wLFE5plKlCmV3ULTDlhQH0J6+c22/PiCWqyyYqVfHwD5bcaNl/dmAbUeRag==",
   "success": true,
   "projectFilePath": "C:\\Users\\Z\\Documents\\projetosFaculdade\\WebStudents\\web.students.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Z\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Z\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
